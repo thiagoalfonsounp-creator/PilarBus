@@ -1,41 +1,39 @@
-# PilarBus - Ecosistema Móvil de Transporte Público
+# PilarBus: Ecosistema Móvil y Plataforma Web de Transporte Público
 
-Este repositorio contiene la arquitectura y la documentación del flujo de desarrollo para la plataforma **PilarBus**, un sistema diseñado para la visualización en tiempo real del transporte público en la ciudad de Pilar.
+## Descripción del Proyecto
+El proyecto **PilarBus** es una iniciativa orientada a la transformación del transporte público local mediante el desarrollo e implementación de una plataforma integral (aplicación móvil y sistema web). Su objetivo principal radica en proporcionar a los ciudadanos la visualización del recorrido y la ubicación de las unidades en tiempo real, mejorando la previsibilidad y la calidad del servicio de movilidad.
 
----
-
-## 🚀 Flujo de Trabajo con Control de Versiones (Git & GitHub)
-
-Para garantizar la estabilidad del sistema y permitir entregas continuas sin interrupción del servicio, el equipo utiliza una estrategia de desarrollo basada en ramificación (Branching Strategy):
-
-1. **Rama Principal (`main`):** Contiene código únicamente en estado listo para producción y totalmente probado.
-2. **Ramas de Características (`feature/nombre-funcionalidad`):** Todo nuevo desarrollo o corrección se realiza en ramas separadas (por ejemplo: `feature/rastreo-tiempo-real` o `feature/integracion-sube`).
-
-### Uso de Pull Requests (PR)
-* Ningún desarrollador tiene permitido realizar `push` directamente sobre la rama `main`.
-* Para integrar nuevo código, se debe abrir un **Pull Request (PR)** desde la rama `feature` hacia `main`.
-* Todo PR requiere al menos la **revisión y aprobación (Code Review)** de un compañero de equipo antes de ser fusionado (*merged*). Esto asegura la calidad del código, el cumplimiento de estándares y previene la introducción de errores en producción.
+Dadas las características del entorno operacional y la necesidad de incorporar la retroalimentación continua de los usuarios beta, la arquitectura del software y su proceso de desarrollo se conciben bajo principios de alta adaptabilidad e integración continua.
 
 ---
 
-## ⚙️ Integración y Entrega Continua (CI/CD)
+## Estrategia de Control de Versiones y Flujo de Trabajo
 
-El proyecto utiliza un pipeline automatizado de CI/CD (mediante GitHub Actions) para validar cada cambio de manera rápida y segura.
+Para garantizar la estabilidad del software en producción y permitir un ritmo de desarrollo colaborativo y ordenado, el equipo adopta una estrategia de ramificación (*Branching Strategy*) estructurada:
 
-### 1. Validación Automática (CI - Integración Continua)
-Cada vez que se abre o actualiza un Pull Request, la automatización ejecuta los siguientes pasos:
-* **Build:** Compila la aplicación para verificar que no existan errores de sintaxis o dependencias rotas.
-* **Test:** Ejecuta automáticamente la suite de pruebas unitarias e integrales (por ejemplo, validación de endpoints y lógica de rastreo).
+* **Rama Principal (`main`):** Almacena únicamente versiones estables del código que han superado los procesos de validación y se encuentran en condiciones de desplegarse en el entorno de producción.
+* **Ramas de Funcionalidad (`feature/*`):** Todo nuevo requerimiento, mejora o corrección se desarrolla en ramas independientes a partir de `main` (por ejemplo: `feature/rastreo-tiempo-real` o `feature/integracion-sube`).
 
-> Si la fase de **Build** o **Test** falla, el Pull Request se bloquea automáticamente y no puede fusionarse a `main` hasta corregir el problema.
-
-### 2. Despliegue Automático (CD - Entrega Continua)
-Una vez que el Pull Request es aprobado y fusionado con éxito en la rama `main`:
-* El pipeline activa el despliegue automático hacia la infraestructura en la nube.
-* Se realiza un despliegue sin tiempo de inactividad (*Zero-Downtime Deployment*), garantizando que los ciudadanos sigan utilizando la aplicación sin interrupciones mientras se actualiza la versión.
+### Protocolo de Pull Requests y Revisión de Código
+La integración de cambios a la rama principal está estrictamente regulada mediante las siguientes directrices:
+* Queda restringido el envío directo de cambios (*direct push*) sobre la rama `main`.
+* Todo desarrollo completado debe someterse a la creación de un **Pull Request (PR)** hacia la rama principal.
+* Cada Pull Request requiere la revisión y aprobación formal (*Code Review*) de al menos un integrante del equipo técnico. Este proceso asegura el cumplimiento de las normativas de arquitectura, la calidad del código y previene la introducción de regresiones en el sistema.
 
 ---
 
-## 👥 Equipo de Desarrollo
-* **Asignatura:** Fundamentos del Desarrollo del Software y Metodologías Ágiles
-* **Universidad Nacional de Pilar (2026)**
+## Integración y Entrega Continua (CI/CD)
+
+El repositorio cuenta con un flujo de trabajo automatizado (*Pipeline CI/CD*) que garantiza que cada modificación sea evaluada antes de su incorporación definitiva.
+
+### 1. Integración Continua (CI)
+Ante la apertura o actualización de un Pull Request, el sistema ejecuta de forma automática las siguientes etapas de verificación:
+* **Compilación (*Build*):** Comprueba que la solución compile correctamente y que no existan inconsistencias en las dependencias del proyecto.
+* **Verificación de Pruebas (*Test*):** Ejecuta la batería de pruebas unitarias y de integración para certificar que la lógica de negocio y las interfaces de conexión funcionan acorde a las especificaciones.
+
+En caso de detectarse fallos en cualquiera de estas fases, la fusión del Pull Request queda bloqueada hasta que las observaciones sean subsanadas.
+
+### 2. Entrega y Despliegue Continuo (CD)
+Una vez que el Pull Request cuenta con la aprobación requerida y supera las pruebas automatizadas, se efectúa la fusión con la rama `main`:
+* El flujo de despliegue transfiere automáticamente los cambios hacia la infraestructura en la nube.
+* Se utiliza un esquema de despliegue sin interrupción del servicio (*Zero-Downtime Deployment*), lo que asegura la operatividad ininterrumpida de la aplicación
